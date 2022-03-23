@@ -1,0 +1,20 @@
+[[package]]
+name = 'core'
+dependencies = []
+
+[[package]]
+name = 'core'
+source = 'git+https://github.com/FuelLabs/sway-lib-core?reference=master#30274cf817c1848e28f984c2e8703eb25e7a3a44'
+dependencies = []
+
+[[package]]
+name = 'ex1'
+dependencies = [
+    'core',
+    'std git+https://github.com/FuelLabs/sway-lib-std?reference=master#a1d77e1140d1b57ee18cc914d320dc7ffdff98fd',
+]
+
+[[package]]
+name = 'std'
+source = 'git+https://github.com/FuelLabs/sway-lib-std?reference=master#a1d77e1140d1b57ee18cc914d320dc7ffdff98fd'
+dependencies = ['core git+https://github.com/FuelLabs/sway-lib-core?reference=master#30274cf817c1848e28f984c2e8703eb25e7a3a44']
