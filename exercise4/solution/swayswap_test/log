@@ -1,0 +1,27 @@
+.program:
+ji   i4
+noop
+DATA_SECTION_OFFSET[0..32]
+DATA_SECTION_OFFSET[32..64]
+lw   $ds $is 1
+add  $$ds $$ds $is
+lw   $r1 data_0               ; load fn selector for call
+move $r5 $cgas                ; move $cgas (gas) into abi function
+lw   $r4 data_1               ; literal instantiation
+lw   $r3 data_2               ; literal instantiation
+lw   $r2 data_3               ; literal instantiation
+move $r0 $sp
+cfei i48
+mcpi $r0 $r2 i32              ; copy contract address for call
+sw   $r0 $r1 i4               ; write fn selector to rA + 32 for call
+call $r0 $r4 $r3 $r5          ; call external contract
+move $r0 $ret
+ret  $zero                    ; fn main returns unit
+noop                          ; word-alignment of data section
+.data:
+data_0 .u32 0x2df2cef7
+data_1 .u64 0x32
+data_2 .b256 0x0000000000000000000000000000000000000000000000000000000000000001
+data_3 .b256 0x55d474d61cb09ca053fe43a4a0a0755eec11d72c9807f932d3b7e2cf9a1f9e87
+
+  Bytecode size is 180 bytes.
