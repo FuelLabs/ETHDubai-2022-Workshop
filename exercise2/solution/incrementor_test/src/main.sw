@@ -5,7 +5,7 @@ use incrementor_abi::Incrementor;
 use std::chain::assert;
 
 fn main() {
-    let abi = abi(Incrementor, 0x8cf7518116e0886cfc33222547b5d0198071841b11e0a7c4f3d3e42d0d91e221);
+    let abi = abi(Incrementor,  0xbe31fb6902be44514b09ef3ccbb7c49370add629e8d0a29946ffbecf49688f8a);
     
     // Initialize locations 0 and 1 to 0
     abi.initialize {

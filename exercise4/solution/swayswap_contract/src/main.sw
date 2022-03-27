@@ -1,8 +1,7 @@
 contract;
 
 use std::{address::*, block::*, chain::*, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
-
-use swayswap_abi::Exchange;
+use swayswap_abi::{Exchange, RemoveLiquidityReturn};
 
 ////////////////////////////////////////
 // Constants
@@ -144,7 +143,7 @@ impl Exchange for Contract {
         minted
     }
 
-    fn remove_liquidity(min_eth: u64, min_tokens: u64, deadline: u64) -> (u64, u64) {
+    fn remove_liquidity(min_eth: u64, min_tokens: u64, deadline: u64) -> RemoveLiquidityReturn {
         assert(msg_amount() > 0);
         assert((msg_asset_id()).into() == (contract_id()).into());
         assert(deadline > height());
@@ -171,7 +170,7 @@ impl Exchange for Contract {
         transfer_to_output(eth_amount, ~ContractId::from(ETH_ID), sender);
         transfer_to_output(token_amount, ~ContractId::from(TOKEN_ID), sender);
 
-        (eth_amount, token_amount)
+        RemoveLiquidityReturn{ eth_amount: eth_amount, token_amount: token_amount }
     }
 
     fn swap_with_minimum(min: u64, deadline: u64) -> u64 {
