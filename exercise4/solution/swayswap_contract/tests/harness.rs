@@ -118,7 +118,7 @@ async fn swayswap() {
     let token_asset_id_array: [u8; 32] = token_contract_id.into();
 
     let coins = wallet
-        .get_spendable_coins(&AssetId::from(asset_id_array), 10)
+        .get_spendable_coins(&AssetId::from(token_asset_id_array), 10)
         .await
         .unwrap();
     dbg!(&coins);
