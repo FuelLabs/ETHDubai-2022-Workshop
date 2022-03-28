@@ -86,11 +86,11 @@ async fn swayswap() {
     let target = testtoken_mod::ContractId {
         value: token_contract_id.into(),
     };
-    let asset_id = testtoken_mod::ContractId {
+    let token_asset_id = testtoken_mod::ContractId {
         value: token_contract_id.into(),
     };
     let result = token_instance
-        .get_balance(target.clone(), asset_id.clone())
+        .get_balance(target.clone(), token_asset_id.clone())
         .call()
         .await
         .unwrap();
@@ -102,26 +102,30 @@ async fn swayswap() {
         value: address.into(),
     };
     token_instance
-        .transfer_coins_to_output(16, asset_id.clone(), address)
+        .transfer_coins_to_output(16, token_asset_id.clone(), address)
         .append_variable_outputs(1)
         .call()
         .await
         .unwrap();
 
     let result = token_instance
-        .get_balance(target.clone(), asset_id.clone())
+        .get_balance(target.clone(), token_asset_id.clone())
         .call()
         .await
         .unwrap();
     assert_eq!(result.value, 61);
 
-    let asset: [u8; 32] = token_contract_id.into();
-    let coins = wallet.get_spendable_coins(&AssetId::from(asset), 10).await.unwrap();
+    let token_asset_id_array: [u8; 32] = token_contract_id.into();
+
+    let coins = wallet
+        .get_spendable_coins(&AssetId::from(asset_id_array), 10)
+        .await
+        .unwrap();
     dbg!(&coins);
 
     /*let call_params = CallParameters::new(Some(1), Some(AssetId::from(asset)));
 
-//    We should be able to deposit some tokens now
+    // We should be able to deposit some tokens now
     let result = swayswap_instance
         .deposit()
         .call_params(call_params)
