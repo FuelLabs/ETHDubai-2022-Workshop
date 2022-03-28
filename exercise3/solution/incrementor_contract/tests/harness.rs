@@ -43,5 +43,5 @@ async fn mint() {
             .await
             .unwrap();
 
-    asserteq!(result.value == 8)
+    assert_eq!(result.value, 8);
 }
