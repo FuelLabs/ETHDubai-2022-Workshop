@@ -5,16 +5,15 @@ dependencies = []
 
 [[package]]
 name = 'std'
-source = 'git+https://github.com/FuelLabs/sway-lib-std?reference=master#4c547fdebb20be694eabf263e855a9fd3bfd1c70'
 dependencies = ['core git+https://github.com/FuelLabs/sway-lib-core?reference=master#082bc8eb0616586ac0000825bfe6e9d47b0c713f']
 
 [[package]]
 name = 'swayswap_abi'
-dependencies = ['std git+https://github.com/FuelLabs/sway-lib-std?reference=master#4c547fdebb20be694eabf263e855a9fd3bfd1c70']
+dependencies = ['std']
 
 [[package]]
 name = 'swayswap_contract'
 dependencies = [
-    'std git+https://github.com/FuelLabs/sway-lib-std?reference=master#4c547fdebb20be694eabf263e855a9fd3bfd1c70',
+    'std',
     'swayswap_abi',
 ]

@@ -1,0 +1,74 @@
+.program:
+jump .0
+noop
+data section offset placeholder         ; data section offset
+.0                                      ; end of metadata
+data section register load placeholder
+add $$ds $$ds $is
+lw $r0 data_0                           ; literal instantiation
+lw $r1 data_0                           ; literal instantiation
+lw $r2 data_0                           ; literal instantiation
+lw $r3 data_0                           ; literal instantiation
+                                        ; Begin contract ABI selector switch
+lw $r28 $fp i73                         ; load input function selector
+lw $r29 data_6                          ; load fn selector for comparison
+eq $r30 $r28 $r29                       ; function selector comparison
+jnei $zero $r30 .1                      ; jump to selected function
+rvrt $zero                              ; revert if no selectors matched
+.1
+lw $r4 $fp i74                          ; loading argument into abi function
+                                        ; withdraw abi fn
+lw $r6 data_1                           ; literal instantiation
+.3                                      ; begin while loop
+                                        ; lt fn call
+move $r8 $r6
+lw $r9 data_2                           ; literal instantiation
+move $r10 $r8
+move $r11 $r9
+lt $r12 $r10 $r11
+move $r7 $r12                           ; return value from inline asm
+jump .5
+.5
+jnei $r7 $one .4
+                                        ; begin if expression
+                                        ; eq fn call
+lw $r15 data_3                          ; literal instantiation
+lw $r16 data_3                          ; literal instantiation
+move $r17 $r15
+move $r18 $r16
+eq $r19 $r17 $r18
+move $r14 $r19                          ; return value from inline asm
+jump .9
+.9
+jnei $r14 $one .8
+lw $r21 data_4                          ; literal instantiation
+.10
+jump .8                                 ; end of then branch
+.8                                      ; End of if exp
+                                        ; add fn call
+move $r23 $r6
+lw $r24 data_5                          ; literal instantiation
+move $r25 $r23
+move $r26 $r24
+add $r27 $r26 $r25
+move $r22 $r27                          ; return value from inline asm
+jump .11
+.11
+move $r6 $r22                           ; variable index reassignment
+.6
+jump .3
+.4                                      ; exit while loop
+move $r5 $r4
+jump .2
+.2
+ret $r5                                 ; withdraw fn return value
+.data:
+data_0 .u64 0x3b9aca00
+data_1 .u64 0x00
+data_2 .u64 0x04
+data_3 .bool 0x01
+data_4 .u64 0x05
+data_5 .u64 0x01
+data_6 .u32 0x9a25a780
+
+  Bytecode size is 228 bytes.

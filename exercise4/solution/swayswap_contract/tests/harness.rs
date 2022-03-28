@@ -5,6 +5,7 @@ use fuels_contract::{
     parameters::{CallParameters, TxParameters},
 };
 use fuels_signers::util::test_helpers;
+use fuels_core::constants::NATIVE_ASSET_ID;
 
 abigen!(TestSwayswap, "out/debug/swayswap_contract-abi.json");
 
@@ -20,12 +21,25 @@ async fn swayswap() {
 
     let instance = TestSwayswap::new(id.to_string(), provider, wallet);
 
-    /*let call_params = CallParameters::new(Some(11), None);
+    let call_params = CallParameters::new(Some(11), None);
     let result = instance
         .deposit()
         .append_variable_outputs(1)
         .call_params(call_params)
         .call()
         .await
-        .unwrap();*/
+        .unwrap();
+
+    let asset_id = testswayswap_mod::ContractId { value: NATIVE_ASSET_ID };
+
+    let result = instance
+        .withdraw(9, asset_id)
+        .append_variable_outputs(1)
+//        .call_params(call_params)
+        .call()
+        .await
+        .unwrap();
+    
+    dbg!(&result);
+
 }

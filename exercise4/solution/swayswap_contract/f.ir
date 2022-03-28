@@ -1,0 +1,2634 @@
+.program:
+ji   i4
+noop
+DATA_SECTION_OFFSET[0..32]
+DATA_SECTION_OFFSET[32..64]
+lw   $ds $is 1
+add  $$ds $$ds $is
+lw   $r13 data_0              ; literal instantiation
+lw   $r15 data_1              ; literal instantiation
+lw   $r16 data_0              ; literal instantiation
+lw   $r7 data_2               ; literal instantiation
+lw   $r6 data_2               ; literal instantiation
+lw   $r1 $fp i73              ; load input function selector
+lw   $r0 data_13              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i35            ; jump to selected function
+lw   $r0 data_14              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i213           ; jump to selected function
+lw   $r0 data_15              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i475           ; jump to selected function
+lw   $r0 data_16              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i1166          ; jump to selected function
+lw   $r0 data_17              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i1547          ; jump to selected function
+lw   $r0 data_18              ; load fn selector for comparison
+eq   $r0 $r1 $r0              ; function selector comparison
+jnei $zero $r0 i2000          ; jump to selected function
+rvrt $zero                    ; revert if no selectors matched
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r1 $sp
+cfei i32
+move $r2 $r0
+addi $r0 $r1 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r2 i32              ; cp type size 4 for field value
+move $r0 $r1
+addi $r0 $r0 i0               ; Construct pointer for struct field
+move $r1 $r13
+move $r2 $r0
+move $r1 $r1
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $zero i66            ; conditionally skip RHS for lazy operator
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r6
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i75
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i75                      ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r3 $r2
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r3
+move $r0 $r0
+addi $r4 $r0 i0               ; Construct pointer for struct field
+move $r3 $r1
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i131
+move $r0 $r4
+move $r4 $r3
+move $r3 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r4 $r1
+addi $r1 $r1 i32
+k256 $r3 $r2 $r1
+cfsi i64
+move $r0 $r3                  ; return value from inline asm
+move $r0 $r0
+ji   i146                     ; end of then branch
+move $r0 $r4
+move $r4 $r3
+move $r3 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r4 $r1
+addi $r1 $r1 i32
+s256 $r3 $r2 $r1
+cfsi i64
+move $r0 $r3                  ; return value from inline asm
+move $r0 $r0
+move $r4 $r16
+move $r3 $r0
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i183
+move $r1 $r4
+move $r0 $r3
+move $r4 $sp
+cfei i32
+move $r3 $sp
+cfei i64
+addi $r2 $zero i32
+mcp  $r3 $r1 $r2
+addi $r1 $r3 i32
+mcp  $r1 $r0 $r2
+addi $r2 $r2 i32
+k256 $r4 $r3 $r2
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r0 $r0
+ji   i198                     ; end of then branch
+move $r0 $r4
+move $r4 $r3
+move $r3 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r4 $r1
+addi $r1 $r1 i32
+s256 $r3 $r2 $r1
+cfsi i64
+move $r0 $r3                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+move $r1 $r0
+srw  $r1 $r1
+move $r2 $r1                  ; return value from inline asm
+move $r1 $bal                 ; return value from inline asm
+move $r2 $r2
+move $r1 $r1
+add  $r1 $r1 $r2
+move $r2 $r1                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r2
+move $r1 $r1
+move $r0 $r0
+sww  $r1 $r0
+ret  $zero                    ; fn deposit returns unit
+lw   $r0 $fp i74              ; loading argument into abi function
+lw   $r18 $r0 i0              ; Loading copy type: u64
+addi $r4 $r0 i8               ; Construct pointer for struct field
+move $r0 $r4
+move $r0 $r0
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $zero i235           ; conditionally skip RHS for lazy operator
+move $r0 $r4
+move $r0 $r0
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r6
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i244
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i244                     ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r2 $r3
+move $r0 $r4
+move $r0 $r0
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+move $r0 $r0
+addi $r17 $r0 i0              ; Construct pointer for struct field
+move $r4 $r1
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i294
+move $r0 $r17
+move $r17 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r17 $r1
+addi $r1 $r1 i32
+k256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r0 $r0
+ji   i309                     ; end of then branch
+move $r0 $r17
+move $r17 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r17 $r1
+addi $r1 $r1 i32
+s256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r0 $r0
+move $r16 $r16
+move $r4 $r0
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i346
+move $r0 $r16
+move $r17 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r17 $r1
+addi $r1 $r1 i32
+k256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r4 $r0
+ji   i361                     ; end of then branch
+move $r0 $r16
+move $r17 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r17 $r1
+addi $r1 $r1 i32
+s256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r4 $r0
+move $r0 $r4
+move $r0 $r0
+srw  $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r18
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i381
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i381                     ; end of then branch
+move $r1 $r2
+move $r0 $r18
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r0
+move $r1 $r1
+move $r0 $r0
+sww  $r1 $r0
+move $r0 $r18
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r4 $r3
+lw   $r0 data_5               ; literal instantiation
+lw   $r18 data_6              ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r19 $r0                 ; return value from inline asm
+lw   $r17 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r17
+move $r0 $r19
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i458
+move $r0 $r17
+xos $r0 $r0
+move $r20 $r0                 ; return value from inline asm
+move $r0 $r20
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r18
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i455
+move $r0 $r17
+move $r0 $r20
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r14 $r0                 ; return value from inline asm
+move $r1 $r14
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i447
+move $r0 $r17
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r19
+move $r17 $r0                 ; variable index reassignment
+ji   i454                     ; end of then branch
+move $r1 $r17
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r17 $r0                 ; variable index reassignment
+ji   i457                     ; end of then branch
+move $r0 $r19
+move $r17 $r0                 ; variable index reassignment
+ji   i408
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i467
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i474                     ; end of then branch
+move $r3 $r14
+move $r0 $r2
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r4
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r17
+tro  $r1 $r0 $r3 $r2
+ret  $zero                    ; fn withdraw returns unit
+lw   $r0 $fp i74              ; loading argument into abi function
+lw   $r18 $r0 i0              ; Loading copy type: u64
+lw   $r17 $r0 i1              ; Loading copy type: u64
+lw   $r2 $r0 i2               ; Loading copy type: u64
+move $r1 $bal                 ; return value from inline asm
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i494
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i494                     ; end of then branch
+move $r1 $r2
+bhei $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i510
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i510                     ; end of then branch
+move $r1 $r17
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i525
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i525                     ; end of then branch
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $zero i556           ; conditionally skip RHS for lazy operator
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r6
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i565
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i565                     ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r14 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r14 i0              ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r7
+move $r0 $r0
+srw  $r0 $r0
+move $r3 $r0                  ; return value from inline asm
+move $r0 $r14
+move $r1 $r13
+move $r0 $r0
+move $r0 $r0
+addi $r19 $r0 i0              ; Construct pointer for struct field
+move $r4 $r1
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i617
+move $r0 $r19
+move $r19 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+k256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r0 $r0
+ji   i632                     ; end of then branch
+move $r0 $r19
+move $r19 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+s256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r0 $r0
+move $r16 $r16
+move $r4 $r0
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i669
+move $r0 $r16
+move $r19 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+k256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r1 $r0
+ji   i684                     ; end of then branch
+move $r0 $r16
+move $r19 $r4
+move $r4 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+s256 $r4 $r2 $r1
+cfsi i64
+move $r0 $r4                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r1
+move $r0 $r0
+srw  $r0 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r1
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+sww  $r1 $r0
+move $r0 $r14
+move $r1 $r6
+move $r0 $r0
+move $r0 $r0
+addi $r20 $r0 i0              ; Construct pointer for struct field
+move $r19 $r1
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i734
+move $r0 $r20
+move $r20 $r19
+move $r19 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r20 $r1
+addi $r1 $r1 i32
+k256 $r19 $r2 $r1
+cfsi i64
+move $r0 $r19                 ; return value from inline asm
+move $r0 $r0
+ji   i749                     ; end of then branch
+move $r0 $r20
+move $r20 $r19
+move $r19 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r20 $r1
+addi $r1 $r1 i32
+s256 $r19 $r2 $r1
+cfsi i64
+move $r0 $r19                 ; return value from inline asm
+move $r0 $r0
+move $r19 $r16
+move $r16 $r0
+lw   $r1 data_3               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r0
+lw   $r1 data_4               ; HashMethod enum instantiation
+move $r0 $sp                  ; load $sp for enum pointer
+cfei i16
+mcli $r0 i2
+sw   $r0 $r1 i0
+move $r0 $r0
+move $r2 $r2
+move $r1 $r0
+addi $r0 $zero i8
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i786
+move $r0 $r19
+move $r19 $r16
+move $r16 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+k256 $r16 $r2 $r1
+cfsi i64
+move $r0 $r16                 ; return value from inline asm
+move $r1 $r0
+ji   i801                     ; end of then branch
+move $r0 $r19
+move $r19 $r16
+move $r16 $sp
+cfei i32
+move $r2 $sp
+cfei i64
+addi $r1 $zero i32
+mcp  $r2 $r0 $r1
+addi $r0 $r2 i32
+mcp  $r0 $r19 $r1
+addi $r1 $r1 i32
+s256 $r16 $r2 $r1
+cfsi i64
+move $r0 $r16                 ; return value from inline asm
+move $r1 $r0
+move $r0 $r1
+move $r0 $r0
+srw  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r1
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+sww  $r1 $r0
+move $r1 $r4
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i825
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i825                     ; end of then branch
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r3
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1038
+move $r1 $r18
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i848
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i848                     ; end of then branch
+move $r0 $r13
+move $r15 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r15 i0              ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r15
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r15 $r0                 ; return value from inline asm
+move $r0 $r6
+move $r16 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r16 i0              ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r16
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r16 $r0                 ; return value from inline asm
+move $r2 $r4
+move $r1 $r16
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r2 $r4
+move $r1 $r3
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r17
+move $r0 $r16
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i931            ; conditionally skip RHS for lazy operator
+move $r1 $r4
+move $r0 $r18
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i940
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i940                     ; end of then branch
+move $r0 $r4
+move $r0 $r0
+mint $r0
+move $r2 $r7
+move $r1 $r3
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+sww  $r1 $r0
+move $r0 $r4
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r14 $r14
+lw   $r0 data_5               ; literal instantiation
+lw   $r15 data_6              ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r16 $r0                 ; return value from inline asm
+lw   $r17 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r17
+move $r0 $r16
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1019
+move $r0 $r17
+xos $r0 $r0
+move $r18 $r0                 ; return value from inline asm
+move $r0 $r18
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1016
+move $r0 $r17
+move $r0 $r18
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r5 $r0                  ; return value from inline asm
+move $r1 $r5
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1008
+move $r0 $r17
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r16
+move $r17 $r0                 ; variable index reassignment
+ji   i1015                    ; end of then branch
+move $r1 $r17
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r17 $r0                 ; variable index reassignment
+ji   i1018                    ; end of then branch
+move $r0 $r16
+move $r17 $r0                 ; variable index reassignment
+ji   i969
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1028
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1035                    ; end of then branch
+move $r3 $r5
+move $r0 $r2
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r14
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r17
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable minted reassignment
+ji   i1164                    ; end of then branch
+move $r1 $r4
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1053
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1053                    ; end of then branch
+move $r0 $r17
+move $r0 $r13
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r3
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r0 $r4
+move $r0 $r0
+mint $r0
+move $r1 $r7
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+sww  $r1 $r0
+move $r0 $r4
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r14 $r14
+lw   $r0 data_5               ; literal instantiation
+lw   $r15 data_6              ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r16 $r0                 ; return value from inline asm
+lw   $r17 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r17
+move $r0 $r16
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1146
+move $r0 $r17
+xos $r0 $r0
+move $r18 $r0                 ; return value from inline asm
+move $r0 $r18
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1143
+move $r0 $r17
+move $r0 $r18
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r5 $r0                  ; return value from inline asm
+move $r1 $r5
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1135
+move $r0 $r17
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r16
+move $r17 $r0                 ; variable index reassignment
+ji   i1142                    ; end of then branch
+move $r1 $r17
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r17 $r0                 ; variable index reassignment
+ji   i1145                    ; end of then branch
+move $r0 $r16
+move $r17 $r0                 ; variable index reassignment
+ji   i1096
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1155
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1162                    ; end of then branch
+move $r3 $r5
+move $r0 $r2
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r14
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r17
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable minted reassignment
+move $r0 $r0
+ret  $r0                      ; add_liquidity fn return value
+lw   $r0 $fp i74              ; loading argument into abi function
+lw   $r14 $r0 i0              ; Loading copy type: u64
+lw   $r5 $r0 i1               ; Loading copy type: u64
+lw   $r4 $r0 i2               ; Loading copy type: u64
+move $r1 $bal                 ; return value from inline asm
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1185
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1185                    ; end of then branch
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r3 $r0 i0               ; Construct pointer for struct field
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+move $r2 $r3
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1216
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1216                    ; end of then branch
+move $r1 $r4
+bhei $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1232
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1232                    ; end of then branch
+move $r1 $r14
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1245           ; conditionally skip RHS for lazy operator
+move $r1 $r5
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1254
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1254                    ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r4 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r4 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r7
+move $r0 $r0
+srw  $r0 $r0
+move $r15 $r0                 ; return value from inline asm
+move $r1 $r15
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1280
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1280                    ; end of then branch
+move $r0 $r13
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r3
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r16 $r0                 ; return value from inline asm
+move $r0 $r6
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r3
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r3 $r0                  ; return value from inline asm
+move $r2 $bal                 ; return value from inline asm
+move $r1 $r16
+move $r0 $r15
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r16 $bal                ; return value from inline asm
+move $r2 $r3
+move $r1 $r15
+move $r2 $r2
+move $r1 $r1
+div  $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+move $r2 $r16
+move $r1 $r1
+mul  $r1 $r2 $r1
+move $r16 $r1                 ; return value from inline asm
+move $r0 $r0
+move $r1 $r14
+move $r2 $r0
+move $r1 $r1
+lt   $r1 $r2 $r1
+not  $r1 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1353           ; conditionally skip RHS for lazy operator
+move $r2 $r16
+move $r1 $r5
+move $r2 $r2
+move $r1 $r1
+lt   $r1 $r2 $r1
+not  $r1 $r1
+move $r1 $r1                  ; return value from inline asm
+move $r1 $r1
+move $r1 $r1
+eq   $r1 $r1 $zero
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1362
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1362                    ; end of then branch
+move $r1 $bal                 ; return value from inline asm
+move $r1 $r1
+burn $r1
+move $r3 $r7
+move $r2 $r15
+move $r1 $bal                 ; return value from inline asm
+move $r2 $r2
+move $r1 $r1
+sub  $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+move $r2 $r3
+move $r1 $r1
+sww  $r2 $r1
+move $r0 $r0
+move $r1 $r13
+move $r3 $sp
+cfei i32
+move $r2 $r1
+addi $r1 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r1 $r2 i32              ; cp type size 4 for field value
+move $r4 $r4
+lw   $r1 data_5               ; literal instantiation
+lw   $r7 data_6               ; literal instantiation
+move $r1 $r1
+lb   $r1 $r1 i0
+move $r14 $r1                 ; return value from inline asm
+lw   $r15 data_7              ; literal instantiation
+lw   $r1 data_3               ; literal instantiation
+lw   $r5 data_8               ; literal instantiation
+move $r2 $r15
+move $r1 $r14
+move $r2 $r2
+move $r1 $r1
+lt   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1441
+move $r1 $r15
+xos $r1 $r1
+move $r17 $r1                 ; return value from inline asm
+move $r1 $r17
+lb   $r1 $r1 i0
+move $r1 $r1                  ; return value from inline asm
+move $r2 $r1
+move $r1 $r7
+move $r2 $r2
+move $r1 $r1
+eq   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1438
+move $r1 $r15
+move $r1 $r17
+addi $r1 $r1 i40
+lw   $r1 $r1 i0
+move $r12 $r1                 ; return value from inline asm
+move $r2 $r12
+lw   $r1 data_3               ; literal instantiation
+move $r2 $r2
+move $r1 $r1
+eq   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1430
+move $r1 $r15
+move $r1 $r1                  ; variable output_index reassignment
+lw   $r1 data_9               ; literal instantiation
+move $r5 $r1                  ; variable output_found reassignment
+move $r1 $r14
+move $r15 $r1                 ; variable index reassignment
+ji   i1437                    ; end of then branch
+move $r2 $r15
+lw   $r1 data_4               ; literal instantiation
+move $r2 $r2
+move $r1 $r1
+add  $r1 $r1 $r2
+move $r1 $r1                  ; return value from inline asm
+move $r15 $r1                 ; variable index reassignment
+ji   i1440                    ; end of then branch
+move $r1 $r14
+move $r15 $r1                 ; variable index reassignment
+ji   i1391
+move $r1 $r5
+move $r1 $r1
+eq   $r1 $r1 $zero
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1450
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1457                    ; end of then branch
+move $r5 $r12
+move $r1 $r3
+addi $r3 $r1 i0               ; Construct pointer for struct field
+move $r1 $r4
+addi $r2 $r1 i0               ; Construct pointer for struct field
+move $r1 $r15
+tro  $r2 $r1 $r5 $r3
+move $r1 $r16
+move $r1 $r6
+move $r3 $sp
+cfei i32
+move $r2 $r1
+addi $r1 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r1 $r2 i32              ; cp type size 4 for field value
+move $r5 $r4
+lw   $r1 data_5               ; literal instantiation
+lw   $r12 data_6              ; literal instantiation
+move $r1 $r1
+lb   $r1 $r1 i0
+move $r14 $r1                 ; return value from inline asm
+lw   $r15 data_7              ; literal instantiation
+lw   $r1 data_3               ; literal instantiation
+lw   $r7 data_8               ; literal instantiation
+move $r2 $r15
+move $r1 $r14
+move $r2 $r2
+move $r1 $r1
+lt   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1523
+move $r1 $r15
+xos $r1 $r1
+move $r4 $r1                  ; return value from inline asm
+move $r1 $r4
+lb   $r1 $r1 i0
+move $r1 $r1                  ; return value from inline asm
+move $r2 $r1
+move $r1 $r12
+move $r2 $r2
+move $r1 $r1
+eq   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1520
+move $r1 $r15
+move $r1 $r4
+addi $r1 $r1 i40
+lw   $r1 $r1 i0
+move $r11 $r1                 ; return value from inline asm
+move $r2 $r11
+lw   $r1 data_3               ; literal instantiation
+move $r2 $r2
+move $r1 $r1
+eq   $r1 $r2 $r1
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1512
+move $r1 $r15
+move $r1 $r1                  ; variable output_index reassignment
+lw   $r1 data_9               ; literal instantiation
+move $r7 $r1                  ; variable output_found reassignment
+move $r1 $r14
+move $r15 $r1                 ; variable index reassignment
+ji   i1519                    ; end of then branch
+move $r2 $r15
+lw   $r1 data_4               ; literal instantiation
+move $r2 $r2
+move $r1 $r1
+add  $r1 $r1 $r2
+move $r1 $r1                  ; return value from inline asm
+move $r15 $r1                 ; variable index reassignment
+ji   i1522                    ; end of then branch
+move $r1 $r14
+move $r15 $r1                 ; variable index reassignment
+ji   i1473
+move $r1 $r7
+move $r1 $r1
+eq   $r1 $r1 $zero
+move $r1 $r1                  ; return value from inline asm
+jnei $r1 $one i1532
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1539                    ; end of then branch
+move $r4 $r11
+move $r1 $r3
+addi $r3 $r1 i0               ; Construct pointer for struct field
+move $r1 $r5
+addi $r2 $r1 i0               ; Construct pointer for struct field
+move $r1 $r15
+tro  $r2 $r1 $r4 $r3
+move $r1 $sp
+cfei i16
+move $r0 $r0
+sw   $r1 $r0 i0
+move $r0 $r16
+sw   $r1 $r0 i1
+lw   $r0 data_10              ; loading rB for RETD
+retd  $r1 $r0                 ; remove_liquidity fn return value
+lw   $r0 $fp i74              ; loading argument into abi function
+lw   $r5 $r0 i0               ; Loading copy type: u64
+lw   $r0 $r0 i1               ; Loading copy type: u64
+move $r1 $r0
+bhei $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1567
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1567                    ; end of then branch
+move $r1 $bal                 ; return value from inline asm
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1580           ; conditionally skip RHS for lazy operator
+move $r1 $r5
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1589
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1589                    ; end of then branch
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $zero i1620          ; conditionally skip RHS for lazy operator
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r6
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1629
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1629                    ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r13
+move $r4 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r4 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r4
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r3
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r12 $r0                 ; return value from inline asm
+move $r0 $r6
+move $r4 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r4 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r4
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r3
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r11 $r0                 ; return value from inline asm
+lw   $r0 data_3               ; literal instantiation
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r3 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r3 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r3
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r3 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r3 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1844
+move $r4 $bal                 ; return value from inline asm
+move $r7 $r12
+move $r3 $r11
+move $r1 $r7
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1705           ; conditionally skip RHS for lazy operator
+move $r1 $r3
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1714
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1714                    ; end of then branch
+move $r1 $r4
+lw   $r0 data_11              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r3
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r3 $r0                  ; return value from inline asm
+move $r1 $r7
+lw   $r0 data_12              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r3
+move $r0 $r0
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r5
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1759
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1759                    ; end of then branch
+move $r0 $r4
+move $r0 $r6
+move $r7 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r7 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r2
+lw   $r0 data_5               ; literal instantiation
+lw   $r3 data_6               ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r12 $r0                 ; return value from inline asm
+lw   $r14 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r11 data_8              ; literal instantiation
+move $r1 $r14
+move $r0 $r12
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1825
+move $r0 $r14
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r3
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1822
+move $r0 $r14
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r10 $r0                 ; return value from inline asm
+move $r1 $r10
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1814
+move $r0 $r14
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r11 $r0                 ; variable output_found reassignment
+move $r0 $r12
+move $r14 $r0                 ; variable index reassignment
+ji   i1821                    ; end of then branch
+move $r1 $r14
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r14 $r0                 ; variable index reassignment
+ji   i1824                    ; end of then branch
+move $r0 $r12
+move $r14 $r0                 ; variable index reassignment
+ji   i1775
+move $r0 $r11
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1834
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1841                    ; end of then branch
+move $r3 $r10
+move $r0 $r7
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r14
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable bought reassignment
+ji   i1998                    ; end of then branch
+move $r4 $bal                 ; return value from inline asm
+move $r7 $r11
+move $r3 $r12
+move $r1 $r7
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1860           ; conditionally skip RHS for lazy operator
+move $r1 $r3
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1869
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1869                    ; end of then branch
+move $r1 $r4
+lw   $r0 data_11              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r3
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r3 $r0                  ; return value from inline asm
+move $r1 $r7
+lw   $r0 data_12              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r3
+move $r0 $r0
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r5
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1914
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1914                    ; end of then branch
+move $r0 $r4
+move $r0 $r13
+move $r7 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r7 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r2
+lw   $r0 data_5               ; literal instantiation
+lw   $r3 data_6               ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r12 $r0                 ; return value from inline asm
+lw   $r14 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r11 data_8              ; literal instantiation
+move $r1 $r14
+move $r0 $r12
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1980
+move $r0 $r14
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r3
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1977
+move $r0 $r14
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r10 $r0                 ; return value from inline asm
+move $r1 $r10
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1969
+move $r0 $r14
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r11 $r0                 ; variable output_found reassignment
+move $r0 $r12
+move $r14 $r0                 ; variable index reassignment
+ji   i1976                    ; end of then branch
+move $r1 $r14
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r14 $r0                 ; variable index reassignment
+ji   i1979                    ; end of then branch
+move $r0 $r12
+move $r14 $r0                 ; variable index reassignment
+ji   i1930
+move $r0 $r11
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i1989
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i1996                    ; end of then branch
+move $r3 $r10
+move $r0 $r7
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r14
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable bought reassignment
+move $r0 $r0
+ret  $r0                      ; swap_with_minimum fn return value
+lw   $r0 $fp i74              ; loading argument into abi function
+lw   $r7 $r0 i0               ; Loading copy type: u64
+lw   $r3 $r0 i1               ; Loading copy type: u64
+lw   $r0 $r0 i2               ; Loading copy type: u64
+move $r1 $r0
+bhei $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+not  $r0 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2021
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2021                    ; end of then branch
+move $r1 $r7
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2034           ; conditionally skip RHS for lazy operator
+move $r1 $r3
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2043
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2043                    ; end of then branch
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $zero i2074          ; conditionally skip RHS for lazy operator
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r6
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2083
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2083                    ; end of then branch
+lw   $r0 data_0               ; literal instantiation
+move $r5 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r5 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r13
+move $r4 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r4 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r4
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r11 $r0                 ; return value from inline asm
+move $r0 $r6
+move $r4 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r4 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $fp                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r4
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r2
+addi $r0 $r0 i0               ; Construct pointer for struct field
+bal  $r0 $r1 $r0
+move $r4 $r0                  ; return value from inline asm
+lw   $r0 data_3               ; literal instantiation
+addi $r0 $fp i32
+move $r0 $r0                  ; return value from inline asm
+move $r2 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r2 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r0 $r2
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+move $r2 $r1
+move $r1 $r0
+addi $r0 $zero i32
+meq  $r0 $r2 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2381
+move $r10 $bal                ; return value from inline asm
+move $r2 $r11
+move $r4 $r4
+move $r1 $r2
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2159           ; conditionally skip RHS for lazy operator
+move $r1 $r4
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2168
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2168                    ; end of then branch
+move $r2 $r2
+move $r1 $r4
+lw   $r0 data_12              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r10
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+lw   $r0 data_11              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r3
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r1 $r2
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2296
+move $r0 $r2
+move $r0 $r13
+move $r10 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r10 i0              ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r5
+lw   $r0 data_5               ; literal instantiation
+lw   $r11 data_6              ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r12 $r0                 ; return value from inline asm
+lw   $r13 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r13
+move $r0 $r12
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2280
+move $r0 $r13
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r11
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2277
+move $r0 $r13
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r9 $r0                  ; return value from inline asm
+move $r1 $r9
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2269
+move $r0 $r13
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r12
+move $r13 $r0                 ; variable index reassignment
+ji   i2276                    ; end of then branch
+move $r1 $r13
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r13 $r0                 ; variable index reassignment
+ji   i2279                    ; end of then branch
+move $r0 $r12
+move $r13 $r0                 ; variable index reassignment
+ji   i2230
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2289
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2296                    ; end of then branch
+move $r3 $r9
+move $r0 $r10
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r13
+tro  $r1 $r0 $r3 $r2
+move $r0 $r7
+move $r0 $r6
+move $r6 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r6 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r5
+lw   $r0 data_5               ; literal instantiation
+lw   $r9 data_6               ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r10 $r0                 ; return value from inline asm
+lw   $r7 data_7               ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r7
+move $r0 $r10
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2362
+move $r0 $r7
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r9
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2359
+move $r0 $r7
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r8 $r0                  ; return value from inline asm
+move $r1 $r8
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2351
+move $r0 $r7
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r10
+move $r7 $r0                  ; variable index reassignment
+ji   i2358                    ; end of then branch
+move $r1 $r7
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r7 $r0                  ; variable index reassignment
+ji   i2361                    ; end of then branch
+move $r0 $r10
+move $r7 $r0                  ; variable index reassignment
+ji   i2312
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2371
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2378                    ; end of then branch
+move $r3 $r8
+move $r0 $r6
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r7
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable sold reassignment
+ji   i2618                    ; end of then branch
+move $r10 $bal                ; return value from inline asm
+move $r2 $r4
+move $r4 $r11
+move $r1 $r2
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2397           ; conditionally skip RHS for lazy operator
+move $r1 $r4
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r0 $r0
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2406
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2406                    ; end of then branch
+move $r2 $r2
+move $r1 $r4
+lw   $r0 data_12              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r1 $r4
+move $r0 $r10
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+lw   $r0 data_11              ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+mul  $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r2
+move $r0 $r0
+move $r1 $r1
+move $r0 $r0
+div  $r0 $r1 $r0
+move $r1 $r0                  ; return value from inline asm
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r4 $r0                  ; return value from inline asm
+move $r1 $r3
+move $r0 $r4
+move $r1 $r1
+move $r0 $r0
+sub  $r0 $r1 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r1 $r2
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+gt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2534
+move $r0 $r2
+move $r0 $r6
+move $r6 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r6 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r5
+lw   $r0 data_5               ; literal instantiation
+lw   $r10 data_6              ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r11 $r0                 ; return value from inline asm
+lw   $r12 data_7              ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r12
+move $r0 $r11
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2518
+move $r0 $r12
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r10
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2515
+move $r0 $r12
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r9 $r0                  ; return value from inline asm
+move $r1 $r9
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2507
+move $r0 $r12
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r11
+move $r12 $r0                 ; variable index reassignment
+ji   i2514                    ; end of then branch
+move $r1 $r12
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r12 $r0                 ; variable index reassignment
+ji   i2517                    ; end of then branch
+move $r0 $r11
+move $r12 $r0                 ; variable index reassignment
+ji   i2468
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2527
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2534                    ; end of then branch
+move $r3 $r9
+move $r0 $r6
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r12
+tro  $r1 $r0 $r3 $r2
+move $r0 $r7
+move $r0 $r13
+move $r6 $sp
+cfei i32
+move $r1 $r0
+addi $r0 $r6 i0               ; prep struct field reg (size 4 for field value)
+mcpi $r0 $r1 i32              ; cp type size 4 for field value
+move $r5 $r5
+lw   $r0 data_5               ; literal instantiation
+lw   $r9 data_6               ; literal instantiation
+move $r0 $r0
+lb   $r0 $r0 i0
+move $r10 $r0                 ; return value from inline asm
+lw   $r7 data_7               ; literal instantiation
+lw   $r0 data_3               ; literal instantiation
+lw   $r3 data_8               ; literal instantiation
+move $r1 $r7
+move $r0 $r10
+move $r1 $r1
+move $r0 $r0
+lt   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2600
+move $r0 $r7
+xos $r0 $r0
+move $r2 $r0                  ; return value from inline asm
+move $r0 $r2
+lb   $r0 $r0 i0
+move $r0 $r0                  ; return value from inline asm
+move $r1 $r0
+move $r0 $r9
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2597
+move $r0 $r7
+move $r0 $r2
+addi $r0 $r0 i40
+lw   $r0 $r0 i0
+move $r8 $r0                  ; return value from inline asm
+move $r1 $r8
+lw   $r0 data_3               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+eq   $r0 $r1 $r0
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2589
+move $r0 $r7
+move $r0 $r0                  ; variable output_index reassignment
+lw   $r0 data_9               ; literal instantiation
+move $r3 $r0                  ; variable output_found reassignment
+move $r0 $r10
+move $r7 $r0                  ; variable index reassignment
+ji   i2596                    ; end of then branch
+move $r1 $r7
+lw   $r0 data_4               ; literal instantiation
+move $r1 $r1
+move $r0 $r0
+add  $r0 $r0 $r1
+move $r0 $r0                  ; return value from inline asm
+move $r7 $r0                  ; variable index reassignment
+ji   i2599                    ; end of then branch
+move $r0 $r10
+move $r7 $r0                  ; variable index reassignment
+ji   i2550
+move $r0 $r3
+move $r0 $r0
+eq   $r0 $r0 $zero
+move $r0 $r0                  ; return value from inline asm
+jnei $r0 $one i2609
+lw   $r0 data_3               ; literal instantiation
+move $r0 $r0
+rvrt $r0
+ji   i2616                    ; end of then branch
+move $r3 $r8
+move $r0 $r6
+addi $r2 $r0 i0               ; Construct pointer for struct field
+move $r0 $r5
+addi $r1 $r0 i0               ; Construct pointer for struct field
+move $r0 $r7
+tro  $r1 $r0 $r3 $r2
+move $r0 $r4
+move $r0 $r0                  ; variable sold reassignment
+move $r0 $r0
+ret  $r0                      ; swap_with_maximum fn return value
+noop                          ; word-alignment of data section
+.data:
+data_0 .b256 0x0000000000000000000000000000000000000000000000000000000000000000
+data_1 .u64 0x3b9aca00
+data_2 .b256 0x0000000000000000000000000000000000000000000000000000000000000001
+data_3 .u64 0x00
+data_4 .u64 0x01
+data_5 .u64 0x38
+data_6 .u8 0x04
+data_7 .u8 0x00
+data_8 .bool 0x00
+data_9 .bool 0x01
+data_10 .u64 0x10
+data_11 .u64 0x3e5
+data_12 .u64 0x3e8
+data_13 .u32 0x2df2cef7
+data_14 .u32 0x74d3818e
+data_15 .u32 0x855bcabe
+data_16 .u32 0x9e893fc
+data_17 .u32 0x5b98278e
+data_18 .u32 0x11f24934
+
+  Bytecode size is 10700 bytes.

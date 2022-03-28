@@ -37,16 +37,16 @@ fn key_deposits(a: Address, asset_id: b256) -> b256 {
 
 /// Pricing function for converting between ETH and Tokens.
 fn get_input_price(input_amount: u64, input_reserve: u64, output_reserve: u64) -> u64 {
-    assert(input_reserve > 0 && output_reserve > 0);
-    let input_amount_with_fee: u64 = input_amount * 997;
-    let numerator: u64 = input_amount_with_fee * output_reserve;
-    let denominator: u64 = (input_reserve * 1000) + input_amount_with_fee;
-    numerator / denominator
-}
+        assert(input_reserve > 0 && output_reserve > 0);
+        let input_amount_with_fee: u64 = input_amount * 997;
+        let numerator: u64 = input_amount_with_fee * output_reserve;
+        let denominator: u64 = (input_reserve * 1000) + input_amount_with_fee;
+        numerator / denominator
+    }
 
-/// Pricing function for converting between ETH and Tokens.
-fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64) -> u64 {
-    assert(input_reserve > 0 && output_reserve > 0);
+    /// Pricing function for converting between ETH and Tokens.
+    fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64) -> u64 {
+        assert(input_reserve > 0 && output_reserve > 0);
     let numerator: u64 = input_reserve * output_reserve * 1000;
     let denominator: u64 = (output_reserve - output_amount) * 997;
     numerator / denominator + 1
@@ -78,12 +78,12 @@ impl Exchange for Contract {
         let key = key_deposits(sender, asset_id.into());
 
         let deposited_amount = get::<u64>(key);
-        assert(deposited_amount >= amount);
+        assert(deposited_amount > amount - 1);
 
         let new_amount = deposited_amount - amount;
         store(key, new_amount);
 
-        transfer_to_output(amount, contract_id(), sender);
+        transfer_to_output(amount, asset_id, sender);
     }
 
     fn add_liquidity(min_liquidity: u64, max_tokens: u64, deadline: u64) -> u64 {
@@ -103,8 +103,7 @@ impl Exchange for Contract {
         let eth_amount = get::<u64>(eth_amount_key);
         store(eth_amount_key, 0);
         let token_amount_key = key_deposits(sender, TOKEN_ID);
-        let token_amount = get::<u64>(token_amount_key);
-        store(token_amount_key, 0);
+        let current_token_amount = get::<u64>(token_amount_key);
 
         // TODO do we also need to assert the token amount > 0?
         assert(eth_amount > 0);
@@ -118,17 +117,19 @@ impl Exchange for Contract {
             let token_amount = eth_amount * token_reserve / eth_reserve + 1;
             let liquidity_minted = eth_amount * total_liquidity / eth_reserve;
 
-            assert(max_tokens >= token_reserve && liquidity_minted >= min_liquidity);
+            assert((max_tokens > token_amount - 1) && (liquidity_minted > min_liquidity - 1));
 
             mint(liquidity_minted);
             store(S_TOTAL_SUPPLY, total_liquidity + liquidity_minted);
 
             transfer_to_output(liquidity_minted, contract_id(), sender);
 
+            store(token_amount_key, current_token_amount - token_amount);
+
             minted = liquidity_minted;
         } else {
             assert(eth_amount > MINIMUM_LIQUIDITY);
-
+            
             let token_amount = max_tokens;
             let initial_liquidity = this_balance(~ContractId::from(ETH_ID));
 
@@ -136,6 +137,8 @@ impl Exchange for Contract {
             store(S_TOTAL_SUPPLY, initial_liquidity);
 
             transfer_to_output(initial_liquidity, contract_id(), sender);
+
+            store(token_amount_key, current_token_amount - token_amount);
 
             minted = initial_liquidity;
         };
@@ -162,7 +165,7 @@ impl Exchange for Contract {
         let eth_amount = msg_amount() * eth_reserve / total_liquidity;
         let token_amount = msg_amount() * token_reserve / total_liquidity;
 
-        assert(eth_amount >= min_eth && token_amount >= min_tokens);
+        assert((eth_amount > min_eth - 1) && (token_amount > min_tokens - 1));
 
         burn(msg_amount());
         store(S_TOTAL_SUPPLY, total_liquidity - msg_amount());
@@ -174,7 +177,7 @@ impl Exchange for Contract {
     }
 
     fn swap_with_minimum(min: u64, deadline: u64) -> u64 {
-        assert(deadline >= height());
+        assert(deadline > height() - 1);
         assert(msg_amount() > 0 && min > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
@@ -188,12 +191,12 @@ impl Exchange for Contract {
         let mut bought = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let tokens_bought = get_input_price(msg_amount(), eth_reserve, token_reserve);
-            assert(tokens_bought >= min);
+            assert(tokens_bought > min - 1);
             transfer_to_output(tokens_bought, ~ContractId::from(TOKEN_ID), sender);
             bought = tokens_bought;
         } else {
             let eth_bought = get_input_price(msg_amount(), token_reserve, eth_reserve);
-            assert(eth_bought >= min);
+            assert(eth_bought > min - 1);
             transfer_to_output(eth_bought, ~ContractId::from(ETH_ID), sender);
             bought = eth_bought;
         };
@@ -202,7 +205,7 @@ impl Exchange for Contract {
     }
 
     fn swap_with_maximum(amount: u64, max: u64, deadline: u64) -> u64 {
-        assert(deadline >= height());
+        assert(deadline > height() - 1);
         assert(amount > 0 && max > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
