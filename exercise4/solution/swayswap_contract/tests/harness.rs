@@ -115,10 +115,13 @@ async fn swayswap() {
         .unwrap();
     assert_eq!(result.value, 61);
 
-    /* let asset: [u8; 32] = token_contract_id.into();
-    let call_params = CallParameters::new(Some(9), Some(AssetId::from(asset)));
+    let asset: [u8; 32] = token_contract_id.into();
+    let coins = wallet.get_spendable_coins(&AssetId::from(asset), 10).await.unwrap();
+    dbg!(&coins);
 
-    We should be able to deposit some tokens now
+    /*let call_params = CallParameters::new(Some(1), Some(AssetId::from(asset)));
+
+//    We should be able to deposit some tokens now
     let result = swayswap_instance
         .deposit()
         .call_params(call_params)

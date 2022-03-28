@@ -6,15 +6,15 @@ name = "tests"
 version = "0.0.0"
 
 [dependencies]
-fuel-core = { git = "https://github.com/FuelLabs/fuel-core", branch = "master" }
+fuel-core = "0.5.0" 
 fuel-gql-client = { version = "0.4", default-features = false }
-fuel-tx = { git = "https://github.com/FuelLabs/fuel-tx", branch = "master" }
+fuel-tx = "0.7.0 "
 fuel-types = "0.3"
-fuel-vm = { git = "https://github.com/FuelLabs/fuel-vm", branch = "master" }
-fuels-abigen-macro = { git = "https://github.com/FuelLabs/fuels-rs", branch = "master" }
-fuels-signers = { git = "https://github.com/FuelLabs/fuels-rs", branch = "master" }
-fuels-contract = { git = "https://github.com/FuelLabs/fuels-rs", branch = "master" }
-fuels-core = { git = "https://github.com/FuelLabs/fuels-rs", branch = "master" }
+fuel-vm = "0.6.0" 
+fuels-abigen-macro = "0.8.0" 
+fuels-signers = "0.8.0" 
+fuels-contract = "0.8.0" 
+fuels-core = "0.8.0" 
 rand = "0.8"
 tokio = { version = "1.12", features = ["rt", "macros"] }
 

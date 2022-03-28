@@ -1,15 +1,20 @@
 [[package]]
 name = 'core'
+source = 'git+https://github.com/FuelLabs/sway-lib-core?branch=master#082bc8eb0616586ac0000825bfe6e9d47b0c713f'
 dependencies = []
 
 [[package]]
 name = 'std'
-dependencies = ['core']
+source = 'git+https://github.com/FuelLabs/sway-lib-std?branch=master#cea3fd6bce67feb613ef4a66bfc30883f395bf34'
+dependencies = ['core git+https://github.com/FuelLabs/sway-lib-core?branch=master#082bc8eb0616586ac0000825bfe6e9d47b0c713f']
 
 [[package]]
 name = 'token_abi'
-dependencies = ['std']
+dependencies = ['std git+https://github.com/FuelLabs/sway-lib-std?branch=master#cea3fd6bce67feb613ef4a66bfc30883f395bf34']
 
 [[package]]
 name = 'token_contract'
-dependencies = ['token_abi']
+dependencies = [
+    'std git+https://github.com/FuelLabs/sway-lib-std?branch=master#cea3fd6bce67feb613ef4a66bfc30883f395bf34',
+    'token_abi',
+]

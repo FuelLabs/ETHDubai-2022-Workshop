@@ -19,5 +19,5 @@ abi Exchange {
     /// Swap ETH <-> Tokens and tranfers to sender.
     fn swap_with_minimum(min: u64, deadline: u64) -> u64;
     /// Swap ETH <-> Tokens and tranfers to sender.
-    fn swap_with_maximum(amount: u64, max: u64, deadline: u64) -> u64;
+    fn swap_with_maximum(amount: u64, deadline: u64) -> u64;
 }

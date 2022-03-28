@@ -83,7 +83,7 @@ impl Exchange for Contract {
         let new_amount = deposited_amount - amount;
         store(key, new_amount);
 
-        transfer_to_output(amount, asset_id, sender);
+        transfer_to_output(amount, asset_id, sender)
     }
 
     fn add_liquidity(min_liquidity: u64, max_tokens: u64, deadline: u64) -> u64 {
@@ -204,9 +204,9 @@ impl Exchange for Contract {
         bought
     }
 
-    fn swap_with_maximum(amount: u64, max: u64, deadline: u64) -> u64 {
+    fn swap_with_maximum(amount: u64, deadline: u64) -> u64 {
         assert(deadline > height() - 1);
-        assert(amount > 0 && max > 0);
+        assert(amount > 0 && msg_amount() > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
         // TODO replace
@@ -218,16 +218,16 @@ impl Exchange for Contract {
 
         let mut sold = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
-            let eth_sold = get_output_price(msg_amount(), eth_reserve, token_reserve);
-            let refund = max - eth_sold;
+            let eth_sold = get_output_price(amount, eth_reserve, token_reserve);
+            let refund = msg_amount() - eth_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(ETH_ID), sender);
             };
             transfer_to_output(amount, ~ContractId::from(TOKEN_ID), sender);
             sold = eth_sold;
         } else {
-            let tokens_sold = get_output_price(msg_amount(), token_reserve, eth_reserve);
-            let refund = max - tokens_sold;
+            let tokens_sold = get_output_price(amount, token_reserve, eth_reserve);
+            let refund = msg_amount() - tokens_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(TOKEN_ID), sender);
             };
