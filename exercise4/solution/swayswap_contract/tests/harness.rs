@@ -123,7 +123,7 @@ async fn swayswap() {
         .unwrap();
     dbg!(&coins);
 
-    /*let call_params = CallParameters::new(Some(1), Some(AssetId::from(asset)));
+    /*let call_params = CallParameters::new(Some(1), Some(AssetId::from(token_asset_id_array)));
 
     // We should be able to deposit some tokens now
     let result = swayswap_instance
