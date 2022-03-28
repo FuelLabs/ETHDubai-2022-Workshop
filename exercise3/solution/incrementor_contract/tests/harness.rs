@@ -23,21 +23,25 @@ async fn mint() {
     let instance = IncTest::new(id.to_string(), provider, wallet);
 
     // Currently not working due to SDK + forc issues
-    instance.initialize(0, 0)
+    instance.initialize(1)
             .call()
             .await
             .unwrap();
 
-    let result = instance.increment(0, 5)
-            .call()
-            .await
-            .unwrap();
-    dbg!(result);
-
-    let result = instance.get(0)
+    instance.increment(2)
             .call()
             .await
             .unwrap();
 
-    dbg!(result);
+    instance.increment(5)
+            .call()
+            .await
+            .unwrap();
+
+    let result = instance.get()
+            .call()
+            .await
+            .unwrap();
+
+    asserteq!(result.value == 8)
 }
