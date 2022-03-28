@@ -1,0 +1,15 @@
+[[package]]
+name = 'core'
+dependencies = []
+
+[[package]]
+name = 'std'
+dependencies = ['core']
+
+[[package]]
+name = 'token_abi'
+dependencies = ['std']
+
+[[package]]
+name = 'token_contract'
+dependencies = ['token_abi']
