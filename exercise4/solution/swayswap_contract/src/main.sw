@@ -1,6 +1,7 @@
 contract;
 
-use std::{address::*, block::*, chain::*, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
+use std::{address::*, block::*, chain::{*, auth::*}, panic::panic, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
+use std::result::*;
 use swayswap_abi::{Exchange, RemoveLiquidityReturn};
 
 ////////////////////////////////////////
@@ -52,6 +53,23 @@ fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64)
     numerator / denominator + 1
 }
 
+fn returns_msg_sender_address() -> Address {
+    let result: Result<Sender, AuthError> = msg_sender();
+    let mut ret = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+    if result.is_err() {
+        panic(0);
+    } else {
+        let unwrapped = result.unwrap();
+        if let Sender::Address(v) = unwrapped {
+            ret = v;
+        } else {
+            panic(0);
+        }
+    };
+
+    ret
+}
+
 // ////////////////////////////////////////
 // // ABI definitions
 // ////////////////////////////////////////
@@ -60,8 +78,7 @@ impl Exchange for Contract {
     fn deposit() {
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
+//        let sender = returns_msg_sender_address();
         let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
         let key = key_deposits(sender, (msg_asset_id()).into());
 
