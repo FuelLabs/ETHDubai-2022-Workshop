@@ -36,10 +36,9 @@ async fn swayswap() {
     );
 
     // Depost some native assets
-    let call_params = CallParameters::new(Some(11), None);
     swayswap_instance
         .deposit()
-        .call_params(call_params)
+        .call_params(CallParameters::new(Some(11), None))
         .call()
         .await
         .unwrap();
@@ -49,17 +48,15 @@ async fn swayswap() {
         value: NATIVE_ASSET_ID,
     };
     swayswap_instance
-        .withdraw(9, native_asset_id)
+        .withdraw(11, native_asset_id)
         .append_variable_outputs(1)
         .call()
         .await
         .unwrap();
 
+    // Inspect the wallets for native assets
     let wallet_native_asset_coins = wallet.get_coins().await.unwrap();
     dbg!(&wallet_native_asset_coins);
-
-    // This assert should pass when `msg_sender()` is used in Swayswap
-//    assert_eq!(wallet_native_asset_coins, 100 - 11 + 9);
 
     //////////////////////////
     // Load the Token contract
@@ -80,8 +77,8 @@ async fn swayswap() {
             .unwrap();
     let token_instance = TestToken::new(token_contract_id.to_string(), provider, wallet.clone());
 
-    // Mint some tokens
-    token_instance.mint_coins(77).call().await.unwrap();
+    // Mint some alt tokens
+    token_instance.mint_coins(10000).call().await.unwrap();
 
     // Check the balance of the contract of its own asset
     let target = testtoken_mod::ContractId {
@@ -95,42 +92,108 @@ async fn swayswap() {
         .call()
         .await
         .unwrap();
-    assert_eq!(result.value, 77);
+    assert_eq!(result.value, 10000);
 
-    // mint some coins:
+    //////////////////////////////////////////
+    // Start transferring and adding liquidity 
+    //////////////////////////////////////////
+ 
+    // Transfer some alt tokens to the wallet
     let address = wallet.address();
     let address = testtoken_mod::Address {
         value: address.into(),
     };
     token_instance
-        .transfer_coins_to_output(16, token_asset_id.clone(), address)
+        .transfer_coins_to_output(200, token_asset_id.clone(), address.clone())
         .append_variable_outputs(1)
         .call()
         .await
         .unwrap();
 
+    // Check the balance of the contract of its own asset
     let result = token_instance
         .get_balance(target.clone(), token_asset_id.clone())
         .call()
         .await
         .unwrap();
-    assert_eq!(result.value, 61);
+    assert_eq!(result.value, 10000 - 200);
 
+    // Inspect the wallet for alt tokens 
     let token_asset_id_array: [u8; 32] = token_contract_id.into();
-
     let coins = wallet
         .get_spendable_coins(&AssetId::from(token_asset_id_array), 10)
         .await
         .unwrap();
     dbg!(&coins);
 
-    /*let call_params = CallParameters::new(Some(1), Some(AssetId::from(token_asset_id_array)));
-
-    // We should be able to deposit some tokens now
-    let result = swayswap_instance
+    // Depost some native assets
+    swayswap_instance
         .deposit()
-        .call_params(call_params)
+        .call_params(CallParameters::new(Some(50), None))
         .call()
         .await
-        .unwrap();*/
+        .unwrap();
+
+    // deposit some alt tokens into the Swayswap contract
+    let result = swayswap_instance
+        .deposit()
+        .call_params(CallParameters::new(Some(50), Some(AssetId::from(token_asset_id_array))))
+        .call()
+        .await
+        .unwrap();
+
+    // Add some initial liquidity
+    swayswap_instance
+        .add_liquidity(1, 50, 1000)
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap();
+
+    // Inspect the wallet for LP tokens
+    let swayswap_asset_id_array: [u8; 32] = swayswap_contract_id.into();
+    let spendable_coins = wallet
+        .get_spendable_coins(&AssetId::from(swayswap_asset_id_array), 1)
+        .await
+        .unwrap();
+
+    // Fund the wallet again with some alt tokens
+    token_instance
+        .transfer_coins_to_output(400, token_asset_id.clone(), address.clone())
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap();
+
+    // Deposit some native assets
+    swayswap_instance
+        .deposit()
+        .call_params(CallParameters::new(Some(100), None))
+        .call()
+        .await
+        .unwrap();
+
+    // Deposit some alt tokens
+    let result = swayswap_instance
+        .deposit()
+        .call_params(CallParameters::new(Some(100), Some(AssetId::from(token_asset_id_array))))
+        .call()
+        .await
+        .unwrap();
+
+    // Add liquidity for the second time.
+    let result = swayswap_instance
+        .add_liquidity(1, 100, 1000)
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap();
+    dbg!(&result);
+
+    // Inspect the wallet for LP tokens
+    let spendable_coins = wallet
+        .get_spendable_coins(&AssetId::from(swayswap_asset_id_array), 0)
+        .await
+        .unwrap();
+    dbg!(&spendable_coins);
 }

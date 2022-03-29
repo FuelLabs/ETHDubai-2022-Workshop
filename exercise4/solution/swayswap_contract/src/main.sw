@@ -13,10 +13,10 @@ const ETH_ID = 0x000000000000000000000000000000000000000000000000000000000000000
 
 /// Contract ID of the token on the other side of the pool.
 /// Modify at compile time for different pool.
-const TOKEN_ID = 0x0000000000000000000000000000000000000000000000000000000000000001;
+const TOKEN_ID = 0xb611d582a0304df90c3d688bf67986ac282a054b62b04f71b511ca262187538c;
 
 /// Minimum ETH liquidity to open a pool.
-const MINIMUM_LIQUIDITY = 1000000000;
+const MINIMUM_LIQUIDITY = 1; //A more realistic value would be 1000000000;
 
 ////////////////////////////////////////
 // Storage declarations
@@ -117,20 +117,21 @@ impl Exchange for Contract {
         store(eth_amount_key, 0);
         let token_amount_key = key_deposits(sender, TOKEN_ID);
         let current_token_amount = get::<u64>(token_amount_key);
-
-        // TODO do we also need to assert the token amount > 0?
+        
         assert(eth_amount > 0);
 
         let mut minted: u64 = 0;
         if total_liquidity > 0 {
             assert(min_liquidity > 0);
 
-            let eth_reserve = this_balance(~ContractId::from(ETH_ID)) - eth_amount;
+            let eth_reserve = this_balance(~ContractId::from(ETH_ID));
             let token_reserve = this_balance(~ContractId::from(TOKEN_ID));
-            let token_amount = eth_amount * token_reserve / eth_reserve + 1;
-            let liquidity_minted = eth_amount * total_liquidity / eth_reserve;
-
-            assert((max_tokens > token_amount - 1) && (liquidity_minted > min_liquidity - 1));
+            let token_amount = (eth_amount * token_reserve) / eth_reserve;
+            let liquidity_minted = (eth_amount * total_liquidity) / eth_reserve;
+            
+            assert(max_tokens > token_amount - 1); 
+            assert(liquidity_minted > min_liquidity - 1);
+            assert(current_token_amount > token_amount - 1);
 
             mint(liquidity_minted);
             store(S_TOTAL_SUPPLY, total_liquidity + liquidity_minted);
@@ -145,6 +146,7 @@ impl Exchange for Contract {
             
             let token_amount = max_tokens;
             let initial_liquidity = this_balance(~ContractId::from(ETH_ID));
+            assert(current_token_amount > token_amount - 1);
 
             mint(initial_liquidity);
             store(S_TOTAL_SUPPLY, initial_liquidity);
@@ -226,6 +228,7 @@ impl Exchange for Contract {
         let mut sold = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let eth_sold = get_output_price(amount, eth_reserve, token_reserve);
+            assert(msg_amount() > eth_sold - 1);
             let refund = msg_amount() - eth_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(ETH_ID), sender);
@@ -234,6 +237,7 @@ impl Exchange for Contract {
             sold = eth_sold;
         } else {
             let tokens_sold = get_output_price(amount, token_reserve, eth_reserve);
+            assert(msg_amount() > tokens_sold - 1);
             let refund = msg_amount() - tokens_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(TOKEN_ID), sender);
