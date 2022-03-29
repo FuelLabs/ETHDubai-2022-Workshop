@@ -190,9 +190,9 @@ async fn swayswap() {
         .unwrap();
     dbg!(&result);
 
-    // Inspect the wallet for LP tokens
+    // Inspect the wallet for LP tokens - should see 50 LP tokens + 33 LP tokens
     let spendable_coins = wallet
-        .get_spendable_coins(&AssetId::from(swayswap_asset_id_array), 0)
+        .get_spendable_coins(&AssetId::from(swayswap_asset_id_array), 83)
         .await
         .unwrap();
     dbg!(&spendable_coins);
