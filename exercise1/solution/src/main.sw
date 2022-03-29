@@ -1,7 +1,6 @@
 script;
 
-use core::*;
-use std::chain::*;
+use std::assert::assert;
 
 fn check_prime(n: u64) -> bool {
     if n == 0 || n == 1 {
@@ -9,7 +8,7 @@ fn check_prime(n: u64) -> bool {
     } else {
         let mut is_not_prime = false;
         let mut i = 2;
-        while i < n  {
+        while i < n {
             if n % i == 0 {
                 is_not_prime = true;
                 i = n; // break
