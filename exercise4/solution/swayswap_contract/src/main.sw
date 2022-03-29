@@ -1,6 +1,6 @@
 contract;
 
-use std::{address::*, block::*, chain::{*, auth::*}, panic::panic, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
+use std::{address::*, block::*, chain::auth::*, assert::assert, panic::panic, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
 use std::result::*;
 use swayswap_abi::{Exchange, RemoveLiquidityReturn};
 
@@ -53,7 +53,7 @@ fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64)
     numerator / denominator + 1
 }
 
-fn returns_msg_sender_address() -> Address {
+fn get_msg_sender_address_or_panic() -> Address {
     let result: Result<Sender, AuthError> = msg_sender();
     let mut ret = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
     if result.is_err() {
@@ -64,7 +64,7 @@ fn returns_msg_sender_address() -> Address {
             ret = v;
         } else {
             panic(0);
-        }
+        };
     };
 
     ret
@@ -78,8 +78,8 @@ impl Exchange for Contract {
     fn deposit() {
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
-//        let sender = returns_msg_sender_address();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+        let sender = get_msg_sender_address_or_panic();
+
         let key = key_deposits(sender, (msg_asset_id()).into());
 
         let total_amount = get::<u64>(key) + msg_amount();
@@ -89,11 +89,9 @@ impl Exchange for Contract {
     fn withdraw(amount: u64, asset_id: ContractId) {
         assert(asset_id.into() == ETH_ID || asset_id.into() == TOKEN_ID);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
-        let key = key_deposits(sender, asset_id.into());
+        let sender = get_msg_sender_address_or_panic();
 
+        let key = key_deposits(sender, asset_id.into());
         let deposited_amount = get::<u64>(key);
         assert(deposited_amount > amount - 1);
 
@@ -110,9 +108,7 @@ impl Exchange for Contract {
         assert(max_tokens > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+        let sender = get_msg_sender_address_or_panic();
 
         let total_liquidity = get::<u64>(S_TOTAL_SUPPLY);
 
@@ -169,9 +165,7 @@ impl Exchange for Contract {
         assert(deadline > height());
         assert(min_eth > 0 && min_tokens > 0);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+        let sender = get_msg_sender_address_or_panic();
 
         let total_liquidity = get::<u64>(S_TOTAL_SUPPLY);
         assert(total_liquidity > 0);
@@ -198,9 +192,7 @@ impl Exchange for Contract {
         assert(msg_amount() > 0 && min > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+        let sender = get_msg_sender_address_or_panic();
 
         let eth_reserve = this_balance(~ContractId::from(ETH_ID));
         let token_reserve = this_balance(~ContractId::from(TOKEN_ID));
@@ -226,9 +218,7 @@ impl Exchange for Contract {
         assert(amount > 0 && msg_amount() > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
-        // TODO replace
-        // let sender = msg_sender().unwrap();
-        let sender = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
+        let sender = get_msg_sender_address_or_panic();
 
         let eth_reserve = this_balance(~ContractId::from(ETH_ID));
         let token_reserve = this_balance(~ContractId::from(TOKEN_ID));

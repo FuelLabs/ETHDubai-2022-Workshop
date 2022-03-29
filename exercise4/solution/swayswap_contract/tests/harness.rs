@@ -56,9 +56,10 @@ async fn swayswap() {
         .unwrap();
 
     let wallet_native_asset_coins = wallet.get_coins().await.unwrap();
+    dbg!(&wallet_native_asset_coins);
 
     // This assert should pass when `msg_sender()` is used in Swayswap
-    // asserteq!(wallet_native_asset_coins, 100 - 11 + 9);
+//    assert_eq!(wallet_native_asset_coins, 100 - 11 + 9);
 
     //////////////////////////
     // Load the Token contract
