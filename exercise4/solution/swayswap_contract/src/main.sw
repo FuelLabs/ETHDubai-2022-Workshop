@@ -1,6 +1,6 @@
 contract;
 
-use std::{address::*, block::*, chain::auth::*, assert::assert, panic::panic, context::{*, call_frames::*}, contract_id::ContractId, hash::*, storage::*, token::*};
+use std::{address::*, assert::assert, block::*, chain::auth::*, context::{*, call_frames::*}, contract_id::ContractId, hash::*, panic::panic, storage::*, token::*};
 use std::result::*;
 use swayswap_abi::{Exchange, RemoveLiquidityReturn};
 
@@ -47,7 +47,7 @@ fn get_input_price(input_amount: u64, input_reserve: u64, output_reserve: u64) -
 
 /// Pricing function for converting between ETH and Tokens.
 fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64) -> u64 {
-        assert(input_reserve > 0 && output_reserve > 0);
+    assert(input_reserve > 0 && output_reserve > 0);
     let numerator: u64 = input_reserve * output_reserve * 1000;
     let denominator: u64 = (output_reserve - output_amount) * 997;
     numerator / denominator + 1
@@ -118,7 +118,7 @@ impl Exchange for Contract {
         store(eth_amount_key, 0);
         let token_amount_key = key_deposits(sender, TOKEN_ID);
         let current_token_amount = get::<u64>(token_amount_key);
-        
+
         assert(eth_amount > 0);
 
         let mut minted: u64 = 0;
@@ -129,8 +129,8 @@ impl Exchange for Contract {
             let token_reserve = this_balance(~ContractId::from(TOKEN_ID));
             let token_amount = (eth_amount * token_reserve) / eth_reserve;
             let liquidity_minted = (eth_amount * total_liquidity) / eth_reserve;
-            
-            assert(max_tokens > token_amount - 1); 
+
+            assert(max_tokens > token_amount - 1);
             assert(liquidity_minted > min_liquidity - 1);
             assert(current_token_amount > token_amount - 1);
 
@@ -144,7 +144,7 @@ impl Exchange for Contract {
             minted = liquidity_minted;
         } else {
             assert(eth_amount > MINIMUM_LIQUIDITY);
-            
+
             let token_amount = max_tokens;
             let initial_liquidity = this_balance(~ContractId::from(ETH_ID));
             assert(current_token_amount > token_amount - 1);
@@ -187,7 +187,10 @@ impl Exchange for Contract {
         transfer_to_output(eth_amount, ~ContractId::from(ETH_ID), sender);
         transfer_to_output(token_amount, ~ContractId::from(TOKEN_ID), sender);
 
-        RemoveLiquidityReturn{ eth_amount: eth_amount, token_amount: token_amount }
+        RemoveLiquidityReturn {
+            eth_amount: eth_amount,
+            token_amount: token_amount,
+        }
     }
 
     fn swap_with_minimum(min: u64, deadline: u64) -> u64 {
@@ -229,12 +232,12 @@ impl Exchange for Contract {
         let mut sold = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let eth_sold = get_output_price(amount, eth_reserve, token_reserve);
-            /*assert(msg_amount() > eth_sold - 1);
+            assert(msg_amount() > eth_sold - 1);
             let refund = msg_amount() - eth_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(ETH_ID), sender);
             };
-            transfer_to_output(amount, ~ContractId::from(TOKEN_ID), sender);*/
+            transfer_to_output(amount, ~ContractId::from(TOKEN_ID), sender);
             sold = eth_sold;
         } else {
             let tokens_sold = get_output_price(amount, token_reserve, eth_reserve);

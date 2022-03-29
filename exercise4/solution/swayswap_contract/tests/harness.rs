@@ -243,22 +243,19 @@ async fn swayswap() {
     ); // ~= 150 * 40/83
 
     ////////////////////
-    // SWAP WITH MINIMUM 
+    // SWAP WITH MINIMUM
     ////////////////////
-    // ETH -> TOKEN 
-    let result = swayswap_instance
+    // ETH -> TOKEN
+    swayswap_instance
         .swap_with_minimum(10, 1000)
-        .call_params(CallParameters::new(
-            Some(40),
-            None),
-        )
+        .call_params(CallParameters::new(Some(40), None))
         .append_variable_outputs(1)
         .call()
         .await
         .unwrap();
 
     // TOKEN -> ETH
-    let result = swayswap_instance
+    swayswap_instance
         .swap_with_minimum(10, 1000)
         .call_params(CallParameters::new(
             Some(40),
