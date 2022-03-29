@@ -175,8 +175,8 @@ impl Exchange for Contract {
         let eth_reserve = this_balance(~ContractId::from(ETH_ID));
         let token_reserve = this_balance(~ContractId::from(TOKEN_ID));
 
-        let eth_amount = msg_amount() * eth_reserve / total_liquidity;
-        let token_amount = msg_amount() * token_reserve / total_liquidity;
+        let eth_amount = (msg_amount() * eth_reserve) / total_liquidity;
+        let token_amount = (msg_amount() * token_reserve) / total_liquidity;
 
         assert((eth_amount > min_eth - 1) && (token_amount > min_tokens - 1));
 
