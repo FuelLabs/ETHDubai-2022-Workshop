@@ -235,10 +235,37 @@ async fn swayswap() {
     // Inspect the wallet for alt tokens - should see 72 ~= 150 * 40/83
     assert_eq!(
         wallet
-            .get_spendable_coins(&AssetId::from(token_asset_id_array), 1)
+            .get_spendable_coins(&AssetId::from(token_asset_id_array), 72)
             .await
             .unwrap()[0]
             .amount,
         72u64.into()
     ); // ~= 150 * 40/83
+
+    ////////////////////
+    // SWAP WITH MINIMUM 
+    ////////////////////
+    // ETH -> TOKEN 
+    let result = swayswap_instance
+        .swap_with_minimum(10, 1000)
+        .call_params(CallParameters::new(
+            Some(40),
+            None),
+        )
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap();
+
+    // TOKEN -> ETH
+    let result = swayswap_instance
+        .swap_with_minimum(10, 1000)
+        .call_params(CallParameters::new(
+            Some(40),
+            Some(AssetId::from(token_asset_id_array)),
+        ))
+        .append_variable_outputs(1)
+        .call()
+        .await
+        .unwrap();
 }

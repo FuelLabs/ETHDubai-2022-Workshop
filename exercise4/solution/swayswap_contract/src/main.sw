@@ -53,6 +53,7 @@ fn get_output_price(output_amount: u64, input_reserve: u64, output_reserve: u64)
     numerator / denominator + 1
 }
 
+/// Return the sender as an Address or panic
 fn get_msg_sender_address_or_panic() -> Address {
     let result: Result<Sender, AuthError> = msg_sender();
     let mut ret = ~Address::from(0x0000000000000000000000000000000000000000000000000000000000000000);
@@ -228,12 +229,12 @@ impl Exchange for Contract {
         let mut sold = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let eth_sold = get_output_price(amount, eth_reserve, token_reserve);
-            assert(msg_amount() > eth_sold - 1);
+            /*assert(msg_amount() > eth_sold - 1);
             let refund = msg_amount() - eth_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(ETH_ID), sender);
             };
-            transfer_to_output(amount, ~ContractId::from(TOKEN_ID), sender);
+            transfer_to_output(amount, ~ContractId::from(TOKEN_ID), sender);*/
             sold = eth_sold;
         } else {
             let tokens_sold = get_output_price(amount, token_reserve, eth_reserve);
