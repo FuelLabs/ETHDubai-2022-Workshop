@@ -5,4 +5,4 @@ Mohammad Fawaz
 
 Fuel Labs
 
-<img src="./images/fuel_logo.jpg" alt="Fuel Labs logo" width="100"/>
+<img src="./images/Fuel Logo.svg" alt="Fuel Labs logo" width="100"/>
