@@ -24,7 +24,7 @@ fn check_prime(n: u64) -> bool {
 * To test your function, import `assert` from the standard library and use it
   to check the results.
 ```rust
-use std::chain::assert;
+use std::assert::assert;
 ```
 * In `main()`, call your `check_prime()` function and use
   `assert` to check the result:

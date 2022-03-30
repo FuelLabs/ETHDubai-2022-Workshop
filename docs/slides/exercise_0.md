@@ -41,7 +41,7 @@ license = "Apache-2.0"
 name = "hello_world"
 
 [dependencies]
-std = { git = "https://github.com/FuelLabs/sway-lib-std" }
+std = { git = "https://github.com/FuelLabs/sway", branch = "master" }
 ```
 
 ---
@@ -62,7 +62,7 @@ Start a local Fuel full node
 
 ```bash
 $ fuel-core --db-type=in-memory
-March 30 13:29:40.508  INFO fuel_core::service::graph_api: Binding GraphQL provider to 127.0.0.1:4000
+March 29 13:29:40.508  INFO fuel_core::service::graph_api: Binding GraphQL provider to 127.0.0.1:4000
 ```
 
 Run the script on the node
