@@ -31,18 +31,18 @@ we're going to need for Swayswap.
 ---
 
 #### ADDRESS AND CONTRACTID
-* `ContractId`: ID of a deployd contract. Wraps a `b256`.
+* `ContractId`: ID of a contract. Wraps a `b256`.
 * `Address`: a wallet address. Wraps a `b256`.
-* `msg_sender()`: returns the ID of the contract caller which could be an
-  `Address` or a `ContractId`.
-* `msg_asset_id()`: returns the ID of the native asset forwarded with the
-  contract.
+* `msg_sender()`: ID of the contract caller which could be an `Address` or a
+  `ContractId`.
+* `msg_asset_id()`: ID of the asset forwarded with the call.
+* `msg_amount()`: amount of funds forwarded with the call.
 * `this_balance(asset_id: ContractId)`: get the current contract's balance of
   coin `asset_id`.
 
 ---
 
-#### NATIVE ASSETS
+#### ASSETS
 * `mint(amount: u64)`: mint some coins of the current contract's asset ID,
   which is basically the contract ID itself.
 * `burn(amount: u64)`: burn some coins of the current contract's asset ID.
@@ -73,11 +73,9 @@ transfer_to_output
 fn deposit();
 ```
 * Make sure that the coins forwarded are one of the supported token types.
-* Use persistent storage to store the amount deposited at a slot that depends
-  on three parameters (use `hash_pair`):
-  * The asset ID of the coins forwarded.
-  * The address of the sender.
-  * An identifier to indicate that this slot is for deposits.
+* Use persistent storage to store the amount deposited at a slot. 
+* A function for generating key is provided for you in the Github folder for
+  Exercise 4.
 
 ---
 
@@ -97,15 +95,14 @@ Before we continue, let's test what we have so far.
 ---
 
 #### CALLING DEPOSIT()
-* In `tests/harness.rs`, add and configure the boilerplate code from exercise
-  3.
-* The SDK starts each wallet with a default amount of 100 `NATIVE_ASSET_ID` tokens.
+* In `tests/harness.rs`, add and configure the boilerplate code from exercise 3.
+* The SDK starts each wallet with some high default amount of `NATIVE_ASSET_ID`
+  tokens.
 * To deposit 10 coins of type `NATIVE_ASSET_ID`:
 
 ```rust
-let call_params = CallParameters::new(Some(10), None);
 instance.deposit()
-    .call_params(call_params)
+    .call_params(CallParameters::new(Some(10), None))
     .call()
     .await
     .unwrap();
@@ -133,22 +130,57 @@ use fuels_core::constants::NATIVE_ASSET_ID;
 #### VERIFY
 * Running `cargo test` should now pass. 
 * If you try to withdraw more funds than available, the test should fail.
-* If you want to check the remaining balance, you can add a contract method
-  `get_my_balance()` which will fetch the remaining balance for the wallet in
-  the contract.
+* To check the current balance of the wallet:
+
+```rust
+let wallet_coins = wallet.get_coins().await.unwrap();
+```
 
 ---
 
-#### ADD LIQUIDITY
+Let's look at the other contract methods
+
+--- 
+
+#### ADDING LIQUIDITY
 ```rust
 fn add_liquidity
     (min_liquidity: u64, max_tokens: u64, deadline: u64) -> u64;
 ```
-* Goal is to have the contract mint liquidity tokens and send them to the
-  liquidity provider, according to some formula.
-* Assumption is that the sender already deposited both types of coins before
-  calling `add_liquidity`. 
 
+* Given the current liquidity, the current reserve, and the deposited amount,
+  reward the liquidity provider with some freshly minted liquidity tokens.
 
+---
 
+#### REMOVING LIQUIDITY
+```rust
+fn remove_liquidity
+    (min_eth: u64, min_tokens: u64, deadline: u64) -> (u64, u64);
+```
+* Forward some liquidity tokens in exchange for an appropriate amounts of
+both types of tokens. 
 
+---
+
+#### SWAP WITH MINIMUM
+```rust
+fn swap_with_minimum(min: u64, deadline: u64) -> u64;
+```
+* Forward a certain amount of tokens of one type in exchange for a minimum
+  amount of the other token. 
+* All forwarded tokens are exchanged.
+
+---
+
+#### SWAP WITH MAXIMUM
+```rust
+fn swap_with_maximum(amount: u64, deadline: u64) -> u64;
+```
+* Forward a certain amount of tokens of one type in exchange for a specific
+  amount of the other token. 
+* Any unspent token are transferred back to the sender.
+
+---
+
+Let's look at some pseudo-code.

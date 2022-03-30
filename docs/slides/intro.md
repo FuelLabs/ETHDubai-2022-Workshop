@@ -1,3 +1,8 @@
+The material for this workshop is available at
+https://github.com/FuelLabs/ETHDubai-2022-Workshop
+
+---
+
 #### INSTALL THE DEPENDENCIES
 
 * Steps in https://fuellabs.github.io/sway/
@@ -8,7 +13,7 @@
 ```bash
 # MacOS
 brew update
-brew install openssl cmake llvm libpq postgresql
+brew install openssl cmake llvm libpq
 ```
 
 ```bash

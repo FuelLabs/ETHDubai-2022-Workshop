@@ -39,7 +39,7 @@ abi Incrementor {
   dependency for the contract:
 ```toml
 [dependencies]
-std = { git = "https://github.com/FuelLabs/sway-lib-std" }
+std = { git = "https://github.com/FuelLabs/sway" }
 incrementor_abi = { path = "/path/to/incrementor_abi" }
 ```
 * This allows use to start importing symbols from the library
@@ -59,9 +59,9 @@ use incrementor_abi::Incrementor;
 use incrementor_abi::Incrementor;
 
 impl Incrementor for Contract {
-    fn initialize(key: u64, initial_value: u64) { ... }
-    fn increment(key: u64, increment_by: u64) { ... }
-    fn get(key: u64) -> u64 { ... }
+    fn initialize(initial_value: u64) { ... }
+    fn increment(increment_by: u64) { ... }
+    fn get() -> u64 { ... }
 }
 ```
 
@@ -73,17 +73,15 @@ impl Incrementor for Contract {
 
 ```rust
 use example_abi::Example;
-use std::storage::{get, store, hash::{hash_u64, HashMethod}};
-use std::constants::NATIVE_ASSET_ID; // 0x00...0
+use std::storage::{get, store};
 
+const KEY = 0x00...0;
 impl Example for Contract {
-    fn set(initial_value: u64) {
-        let key = hash_u64(NATIVE_ASSET_ID, HashMethod::Sha256);
-        store(key, initial_value);
+    fn set(val: u64) {
+        store(KEY, val);
     }
     fn get() -> u64 {
-        let key = hash_u64(NATIVE_ASSET_ID, HashMethod::Sha256);
-        get::<u64>(key)
+        get::<u64>(KEY)
     }
 }
 ```
@@ -91,7 +89,7 @@ impl Example for Contract {
 ---
 
 #### FUTURE OF STORAGE
-* Naturally, the current use model for storage is not final.
+* The current use model for storage is not final.
 * In the future, storage will look like:
 
 ```rust
@@ -100,7 +98,7 @@ storage {
 }
 
 impl Incrementor for Contract {
-    fn set(new_val: u64) { storage.val = new_val; }
+    fn set(val: u64) { storage.val = val; }
     fn get() -> u64 { storage.val }
 }
 ```

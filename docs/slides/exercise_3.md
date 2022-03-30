@@ -1,6 +1,6 @@
 ### EXERCISE 3
 
-Let's test our contract using a the Rust SDK
+Let's test our contract using the Rust SDK
 
 ---
 
