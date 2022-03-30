@@ -1,2 +1,4 @@
 ## Exercise 2
-Simple contract
+Write a simple incrementor contract using storage, deploy it, and call it from a script.
+
+More info in the slides.
