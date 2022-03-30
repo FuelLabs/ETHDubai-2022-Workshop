@@ -94,7 +94,7 @@ impl Exchange for Contract {
 
         let key = key_deposits(sender, asset_id.into());
         let deposited_amount = get::<u64>(key);
-        assert(deposited_amount > amount - 1);
+        assert(deposited_amount >= amount);
 
         let new_amount = deposited_amount - amount;
         store(key, new_amount);
@@ -130,9 +130,9 @@ impl Exchange for Contract {
             let token_amount = (eth_amount * token_reserve) / eth_reserve;
             let liquidity_minted = (eth_amount * total_liquidity) / eth_reserve;
 
-            assert(max_tokens > token_amount - 1);
-            assert(liquidity_minted > min_liquidity - 1);
-            assert(current_token_amount > token_amount - 1);
+            assert(max_tokens >= token_amount);
+            assert(liquidity_minted >= min_liquidity);
+            assert(current_token_amount >= token_amount);
 
             mint(liquidity_minted);
             store(S_TOTAL_SUPPLY, total_liquidity + liquidity_minted);
@@ -147,7 +147,7 @@ impl Exchange for Contract {
 
             let token_amount = max_tokens;
             let initial_liquidity = this_balance(~ContractId::from(ETH_ID));
-            assert(current_token_amount > token_amount - 1);
+            assert(current_token_amount >= token_amount);
 
             mint(initial_liquidity);
             store(S_TOTAL_SUPPLY, initial_liquidity);
@@ -179,7 +179,7 @@ impl Exchange for Contract {
         let eth_amount = (msg_amount() * eth_reserve) / total_liquidity;
         let token_amount = (msg_amount() * token_reserve) / total_liquidity;
 
-        assert((eth_amount > min_eth - 1) && (token_amount > min_tokens - 1));
+        assert((eth_amount >= min_eth) && (token_amount >= min_tokens));
 
         burn(msg_amount());
         store(S_TOTAL_SUPPLY, total_liquidity - msg_amount());
@@ -194,7 +194,7 @@ impl Exchange for Contract {
     }
 
     fn swap_with_minimum(min: u64, deadline: u64) -> u64 {
-        assert(deadline > height() - 1);
+        assert(deadline >= height());
         assert(msg_amount() > 0 && min > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
@@ -206,12 +206,12 @@ impl Exchange for Contract {
         let mut bought = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let tokens_bought = get_input_price(msg_amount(), eth_reserve, token_reserve);
-            assert(tokens_bought > min - 1);
+            assert(tokens_bought >= min);
             transfer_to_output(tokens_bought, ~ContractId::from(TOKEN_ID), sender);
             bought = tokens_bought;
         } else {
             let eth_bought = get_input_price(msg_amount(), token_reserve, eth_reserve);
-            assert(eth_bought > min - 1);
+            assert(eth_bought >= min);
             transfer_to_output(eth_bought, ~ContractId::from(ETH_ID), sender);
             bought = eth_bought;
         };
@@ -220,7 +220,7 @@ impl Exchange for Contract {
     }
 
     fn swap_with_maximum(amount: u64, deadline: u64) -> u64 {
-        assert(deadline > height() - 1);
+        assert(deadline >= height());
         assert(amount > 0 && msg_amount() > 0);
         assert((msg_asset_id()).into() == ETH_ID || (msg_asset_id()).into() == TOKEN_ID);
 
@@ -232,7 +232,7 @@ impl Exchange for Contract {
         let mut sold = 0;
         if ((msg_asset_id()).into() == ETH_ID) {
             let eth_sold = get_output_price(amount, eth_reserve, token_reserve);
-            assert(msg_amount() > eth_sold - 1);
+            assert(msg_amount() >= eth_sold);
             let refund = msg_amount() - eth_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(ETH_ID), sender);
@@ -241,7 +241,7 @@ impl Exchange for Contract {
             sold = eth_sold;
         } else {
             let tokens_sold = get_output_price(amount, token_reserve, eth_reserve);
-            assert(msg_amount() > tokens_sold - 1);
+            assert(msg_amount() >= tokens_sold);
             let refund = msg_amount() - tokens_sold;
             if refund > 0 {
                 transfer_to_output(refund, ~ContractId::from(TOKEN_ID), sender);
