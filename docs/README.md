@@ -1,12 +1,4 @@
-# Sway: a Rust-based Smart Contract Language
-## EthDubai 2022
+# Sway Workshop - ETHDubai 2022 Workshop
+Build a Dapp on Fuel using the Rust-based smart contract language Sway.
 
-Hosted here: https://sezna.github.io/EthDubai-2022
-
-reveal.js template by Hakim El Hattab
-
-## License
-
-MIT licensed
-
-Copyright (C) 2011-2021 Hakim El Hattab, https://hakim.se
+[Hosted here](https://fuellabs.github.io/ETHDubai-2022-Workshop/)
